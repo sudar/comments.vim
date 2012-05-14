@@ -1,3 +1,14 @@
+comments.vim
+=============
+
+Global Plugin to comment and un-comment lines in different source files in both normal and visual <Shift-V> mode 
+
+I have just added support for Arduino files (both .pde and .ino)
+
+Credit goes to the original author
+
+Original Readme file
+====================
 This is a mirror of http://www.vim.org/scripts/script.php?script_id=1528
 
 Global Plugin to comment and un-comment lines in different source files in both normal and visual <Shift-V> mode

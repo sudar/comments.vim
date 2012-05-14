@@ -20,6 +20,9 @@
 " *********************************************************************************************
  "Modification:
 " *********************************************************************************************
+" Sudar Muthu (http://sudarmuthu.com) 14th May, 2012 
+" Added support for Arduino files
+" *********************************************************************************************
 " Jasmeet Anand  26th April, 2006 v2.0 
 " Fixed C commenting where a single line already had previous comments.
 " int x=0; /*this is an x value*/
@@ -106,8 +109,8 @@ vnoremap <silent> <C-X> :call RangeUnCommentLine()<CR>
 function! CommentLine()
   let file_name = buffer_name("%")
 
-  " for .cpp or .hpp or .java or .C files use //
-  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$'
+  " for .cpp or .hpp or .java or arduino (*.ino or *.pde) files use //
+  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$'
     execute ":silent! normal ^i//\<ESC>==\<down>^"
   " for .c or .h or .pc or .css files use /* */
   elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$'
@@ -171,8 +174,8 @@ endfunction
 function! UnCommentLine()
   let file_name = buffer_name("%")
 
-  " for .cpp or .hpp or .java or .C files use //
-  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$'
+  " for .cpp or .hpp or .java or arduino (*.ino or *.pde) files use //
+  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\/\\///\<CR>:nohlsearch\<CR>=="
   " for .ml or .mli
   elseif file_name =~ '\.ml$' || file_name =~ '\.mli$'
@@ -216,8 +219,8 @@ endfunction
 function! RangeCommentLine()
   let file_name = buffer_name("%")
 
-  " for .cpp or .hpp or .java or .C files use //
-  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$'
+  " for .cpp or .hpp or .java or arduino (*.ino or *.pde) files use //
+  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$'
     execute ":silent! normal :s/\\S/\\/\\/\\0/\<CR>:nohlsearch<CR>=="
   " for .c or .h or .pc or .css files use /* */
   elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$'
@@ -281,8 +284,8 @@ endfunction
 function! RangeUnCommentLine()
   let file_name = buffer_name("%")
 
-  " for .cpp or .hpp or .java files use //
-  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$'
+  " for .cpp or .hpp or .java or arduino (*.ino or *.pde) files use //
+  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$'
     execute ":silent! normal :s/\\/\\///\<CR>:nohlsearch\<CR>=="
   " for .c or .h or .pc or .css files use /* */
   elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$'

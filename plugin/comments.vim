@@ -109,11 +109,11 @@ vnoremap <silent> <C-X> :call RangeUnCommentLine()<CR>
 function! CommentLine()
   let file_name = buffer_name("%")
 
-  " for .cpp or .hpp or .java or arduino (*.ino or *.pde) files use //
-  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$'
+  " for .cpp or .hpp or .java or arduino (*.ino or *.pde) or go files use //
+  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$' || file_name =~ '\.go$'
     execute ":silent! normal ^i//\<ESC>==\<down>^"
   " for .c or .h or .pc or .css files use /* */
-  elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$'
+  elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$' || file_name =~ '\.go$'
     " if there are previous comments on this line ie /* ... */
     if stridx(getline("."), "\/\*") != -1 && stridx(getline("."), "\*\/") != -1
       execute ":silent! normal :nohlsearch\<CR>:s/\\([^\\/\\*]*\\)\\(\\/\\*.*\\*\\/\\)/\\1\\*\\/\\2/\<CR>:s/\\([^[:blank:]]\\+\\)/\\/\\*\\1/\<CR>:nohlsearch\<CR>=="
@@ -175,14 +175,14 @@ function! UnCommentLine()
   let file_name = buffer_name("%")
 
   " for .cpp or .hpp or .java or arduino (*.ino or *.pde) files use //
-  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$'
+  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$' || file_name =~ '\.go$' 
     execute ":silent! normal :nohlsearch\<CR>:s/\\/\\///\<CR>:nohlsearch\<CR>=="
   " for .ml or .mli
   elseif file_name =~ '\.ml$' || file_name =~ '\.mli$'
     execute ":silent! normal :nohlsearch\<CR>:s/(\\*//\<CR>:nohlsearch\<CR>"
 	execute ":silent! normal :nohlsearch\<CR>:s/\\*)//\<CR>:nohlsearch\<CR>=="
   " for .c or .h or .pc or .css files use /* */
-  elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$'
+  elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$' || file_name =~ '\.go$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\/\\*//\<CR>:s/\\*\\///\<CR>:nohlsearch\<CR>=="
   " for .vim files use "
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
@@ -220,10 +220,10 @@ function! RangeCommentLine()
   let file_name = buffer_name("%")
 
   " for .cpp or .hpp or .java or arduino (*.ino or *.pde) files use //
-  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$'
+  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$' || file_name =~ '\.go$' 
     execute ":silent! normal :s/\\S/\\/\\/\\0/\<CR>:nohlsearch<CR>=="
   " for .c or .h or .pc or .css files use /* */
-  elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$'
+  elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$' || file_name =~ '\.go$' 
     " if there are previous comments on this line ie /* ... */
     if stridx(getline("."), "\/\*") != -1 && stridx(getline("."), "\*\/") != -1
       execute ":silent! normal :nohlsearch\<CR>:s/\\([^\\/\\*]*\\)\\(\\/\\*.*\\*\\/\\)/\\1\\*\\/\\2/\<CR>:s/\\([^[:blank:]]\\+\\)/\\/\\*\\1/\<CR>:nohlsearch\<CR>=="
@@ -284,11 +284,11 @@ endfunction
 function! RangeUnCommentLine()
   let file_name = buffer_name("%")
 
-  " for .cpp or .hpp or .java or arduino (*.ino or *.pde) files use //
-  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$'
+  " for .cpp or .hpp or .java or arduino (*.ino or *.pde) or go files use //
+  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$' || file_name =~ '\.go$'
     execute ":silent! normal :s/\\/\\///\<CR>:nohlsearch\<CR>=="
-  " for .c or .h or .pc or .css files use /* */
-  elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$'
+  " for .c or .h or .pc or .css  or go files use /* */
+  elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$' || file_name =~ '\.go$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\/\\*//\<CR>:s/\\*\\///\<CR>:nohlsearch\<CR>=="
   " for .vim files use " 
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'

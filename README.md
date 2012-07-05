@@ -21,13 +21,13 @@ Stick this file in your ~/.vim/plugin directory or in some other 'plugin' direct
 Using [Vundle](https://github.com/gmarik/vundle)
 -------------
 
-'''VimL
+```VimL
 
     Bundle "sudar/comments.vim"
 
     And :BundleInstall
 
-'''
+```
 
 Configuration
 =============
@@ -39,7 +39,7 @@ By default, the following keys are mapped
 
 You can map your own keys if needed
 
-'''VimL
+```VimL
 
 
     let g:comments_map_keys = 0
@@ -54,7 +54,7 @@ You can map your own keys if needed
     " key-mappings for range un-comment lines in visual <Shift-V> mode
     vnoremap <silent> <C-K> :call RangeUnCommentLine()<CR>
 
-'''
+```
 
 
 Original Readme file

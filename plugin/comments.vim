@@ -100,7 +100,7 @@ if !exists('g:comments_map_keys')
     let g:comments_map_keys = 1
 endif
 
-if g:comments_map_keys = 1
+if g:comments_map_keys
     " key-mappings for comment line in normal mode
     noremap  <silent> <C-C> :call CommentLine()<CR>
     " key-mappings for range comment lines in visual <Shift-V> mode

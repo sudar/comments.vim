@@ -175,6 +175,9 @@ function! CommentLine()
   " for VHDL and Haskell files use -- 
   elseif file_name =~ '\.vhd$' || file_name =~ '\.vhdl$' || file_name =~ '\.hs$'
     execute ":silent! normal ^gI-- \<ESC>\<down>^"
+  " for .clj or .cljs files use ;
+  elseif file_name =~ '\.clj$' || file_name =~ '\.cljs$'
+    execute ":silent! normal ^i;; \<ESC>\<down>"
   " for all other files use # 
   else
     execute ":silent! normal ^i#\<ESC>\<down>^"
@@ -220,6 +223,9 @@ function! UnCommentLine()
   " for VHDL and Haskell files use --
   elseif file_name =~ '\.vhd$' || file_name =~ '\.vhdl$' || file_name =~ '\.hs$'
     execute ":silent! normal :nohlsearch\<CR>:s/-- //\<CR>:nohlsearch\<CR>"
+  " for .clj or .cljs
+  elseif file_name =~ '\.clj$' || file_name =~ '\.cljs$'
+      execute ":silent! normal :nohlsearch\<CR>:s/;; //\<CR>:nohlsearch\<CR>=="
   " for all other files use # 
   else
     execute ":silent! normal :nohlsearch\<CR>:s/\\#//\<CR>:nohlsearch\<CR>"
@@ -286,6 +292,9 @@ function! RangeCommentLine()
   " for VHDL and Haskell files use --
   elseif file_name =~ '\.vhd$' || file_name =~ '\.vhdl$' || file_name =~ '\.hs$'
     execute ":silent! normal ^gI-- \<ESC>\<down>^"
+  " for .clj and .cljs files use ;
+  elseif file_name =~ '\.clj$' || file_name =~ '\cljs.$'
+    execute ":silent! normal ^gI;; \<ESC>\<down>^"
   " for all other files use #  
   else
     execute ":silent! normal :s/\\S/\\#\\0/\<CR>:nohlsearch<CR>"
@@ -330,6 +339,9 @@ function! RangeUnCommentLine()
   " for VHDL and Haskell files use --
   elseif file_name =~ '\.vhd$' || file_name =~ '\.vhdl$' || file_name =~ '\.hs$'
     execute ":silent! normal :s/-- //\<CR>:nohlsearch\<CR>"
+  " for .clj and .cljs files use ;
+  elseif file_name =~ '\.clj$' || file_name =~ '\.cljs$'
+    execute ":silent! normal :s/;; //\<CR>:nohlsearch\<CR>"
   " for all other files use # 
   else
     execute ":silent! normal :s/\\#//\<CR>:nohlsearch\<CR>"

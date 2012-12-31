@@ -20,6 +20,10 @@
 " *********************************************************************************************
  "Modification:
 " *********************************************************************************************
+" Sudar Muthu (http://sudarmuthu.com) 31th December, 2012 
+" Added support for pig files
+" *********************************************************************************************
+" *********************************************************************************************
 " Sudar Muthu (http://sudarmuthu.com) 14th May, 2012 
 " Added support for Arduino files
 " *********************************************************************************************
@@ -153,8 +157,8 @@ function! CommentLine()
   " for .vim files use "
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
 	 execute ":silent! normal ^i\"\<ESC>\<down>^"
-  " for .sql files use --
-  elseif file_name =~ '\.sql$'
+  " for .sql or .pig files use --
+  elseif file_name =~ '\.sql$' || filename =~ '\.pig$'
     execute ":silent! normal ^i--\<ESC>\<down>^"
   " for .ksh or .sh or .csh or .pl or .pm files use #
   elseif file_name =~ '\.[kc]\?sh$' || file_name =~ '\.pl$' || file_name =~ '\.pm$'
@@ -194,8 +198,8 @@ function! UnCommentLine()
   " for .vim files use "
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\\"//\<CR>:nohlsearch\<CR>"
-  " for .sql files use --
-  elseif file_name =~ '\.sql$'
+  " for .sql or .pig files use --
+  elseif file_name =~ '\.sql$' || file_name =~ '\.pig$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\-\\-//\<CR>:nohlsearch\<CR>"
   " for .ksh or .sh or .csh or .pl or .pm files use #
   elseif file_name =~ '\.[kc]\?sh$' || file_name =~ '\.pl$' || file_name =~ '\.pm$'
@@ -263,8 +267,8 @@ function! RangeCommentLine()
   " for .vim files use --
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
     execute ":silent! normal :s/\\S/\\\"\\0/\<CR>:nohlsearch<CR>"
-  " for .sql files use --
-  elseif file_name =~ '\.sql$'
+  " for .sql or .pig files use --
+  elseif file_name =~ '\.sql$' || file_name =~ '\.pig$'
     execute ":silent! normal :s/\\S/\\-\\-\\0/\<CR>:nohlsearch<CR>"
   " for .ksh or .sh or .csh or .pl or .pm files use #
   elseif file_name =~ '\.[kc]\?sh$' || file_name =~ '\.pl$' || file_name =~ '\.pm$'
@@ -300,8 +304,8 @@ function! RangeUnCommentLine()
   " for .vim files use " 
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
     execute ":silent! normal :s/\\\"//\<CR>:nohlsearch\<CR>"
-  " for .sql files use -- 
-  elseif file_name =~ '\.sql$'
+  " for .sql or .pig files use --
+  elseif file_name =~ '\.sql$' || file_name =~ '\.pig$'
     execute ":silent! normal :s/\\-\\-//\<CR>:nohlsearch\<CR>"
   " for .ml .mli
   elseif file_name =~ '\.ml$' || file_name =~ '\.mli$'

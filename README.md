@@ -6,6 +6,7 @@ Global Plugin to comment and un-comment lines in different source files in both 
 The following are the changes that I have done to the original Plugin
 
 - Added support for Arduino files (both .pde and .ino)
+- Added support for Pig files (.pig)
 - Added support for Golang (.go) (by [Athom](https://github.com/athom))
 - Added support for remapping the keys if needed
 
@@ -16,7 +17,7 @@ Installation
 
 Manual 
 ------
-Stick this file in your ~/.vim/plugin directory or in some other 'plugin' directory that is in your runtime path  
+Stick this file in your ~/.vim/plugin directory or in some other 'plugin' directory that is in your runtime path
 
 Using [Vundle](https://github.com/gmarik/vundle)
 -------------

@@ -158,7 +158,7 @@ function! CommentLine()
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
 	 execute ":silent! normal ^i\"\<ESC>\<down>^"
   " for .sql or .pig files use --
-  elseif file_name =~ '\.sql$' || filename =~ '\.pig$'
+  elseif file_name =~ '\.sql$' || file_name =~ '\.pig$'
     execute ":silent! normal ^i--\<ESC>\<down>^"
   " for .ksh or .sh or .csh or .pl or .pm files use #
   elseif file_name =~ '\.[kc]\?sh$' || file_name =~ '\.pl$' || file_name =~ '\.pm$'

@@ -20,6 +20,10 @@
 " *********************************************************************************************
  "Modification:
 " *********************************************************************************************
+" Sudar Muthu (http://sudarmuthu.com) 28th November, 2012 
+" Added support for Matlab and Octave (*.m) files
+" *********************************************************************************************
+" *********************************************************************************************
 " Sudar Muthu (http://sudarmuthu.com) 31th December, 2012 
 " Added support for pig files
 " *********************************************************************************************
@@ -163,8 +167,8 @@ function! CommentLine()
   " for .ksh or .sh or .csh or .pl or .pm files use #
   elseif file_name =~ '\.[kc]\?sh$' || file_name =~ '\.pl$' || file_name =~ '\.pm$'
     execute ":silent! normal ^i#\<ESC>\<down>^"
-  " for .tex files use %
-  elseif file_name =~ '\.tex$' || file_name =~ '\.nw$'
+  " for .tex and .m (Matlab and Octave) files use %
+  elseif file_name =~ '\.tex$' || file_name =~ '\.nw$' || file_name =~ '\.m$'
     execute ":silent! normal ^i%\<ESC>\<down>^"
   " for fortran 77 files use C on first column 
   elseif file_name =~ '\.f$' || file_name =~ '\.F$'
@@ -211,8 +215,8 @@ function! UnCommentLine()
   elseif file_name =~ '\.html$' || file_name =~ '\.htm$' || file_name =~ '\.xml$' || file_name =~ '\.xhtml$' 
     execute ":silent! normal :nohlsearch\<CR>:s/<!--//\<CR>=="
     execute ":silent! normal :nohlsearch\<CR>:s/-->//\<CR>=="
-  " for .tex use %
-  elseif file_name =~ '\.tex$' || file_name =~ '\.nw$'
+  " for .tex and .m (Matlab and Octave) files use %
+  elseif file_name =~ '\.tex$' || file_name =~ '\.nw$' || file_name =~ '\.m$'
     execute ":silent! normal :nohlsearch\<CR>:s/%/\<CR>:nohlsearch\<CR>"
   " for fortran 77 files use C on first column 
   elseif file_name =~ '\.f$' || file_name =~ '\.F$'
@@ -280,8 +284,8 @@ function! RangeCommentLine()
   " for .ksh or .sh or .csh or .pl or .pm files use #
   elseif file_name =~ '\.[kc]\?sh$' || file_name =~ '\.pl$' || file_name =~ '\.pm$'
     execute ":silent! normal :s/\\S/\\#\\0/\<CR>:nohlsearch<CR>"
-  " for .tex use %
-  elseif file_name =~ '\.tex$' || file_name =~ '\.nw$'
+  " for .tex and .m (Matlab and Octave) files use %
+  elseif file_name =~ '\.tex$' || file_name =~ '\.nw$' || file_name =~ '\.m$'
     execute ":silent! normal :s/\\S/\\%\\0/\<CR>:nohlsearch<CR>"
   " for fortran 77 files use C on first column 
   elseif file_name =~ '\.f$' || file_name =~ '\.F$'
@@ -327,8 +331,8 @@ function! RangeUnCommentLine()
     execute ":silent! normal :nohlsearch\<CR>:s/-->//\<CR>=="
   elseif file_name =~ '\.[kc]\?sh$' || file_name =~ '\.pl$' || file_name =~ '\.pm$'
     execute ":silent! normal :s/\\#//\<CR>:nohlsearch\<CR>"
-  " for .tex use %
-  elseif file_name =~ '\.tex$' || file_name =~ '\.nw$'
+  " for .tex and .m (Matlab and Octave) files use %
+  elseif file_name =~ '\.tex$' || file_name =~ '\.nw$' || file_name =~ '\.m$'
     execute ":silent! normal :s/%/\<CR>:nohlsearch\<CR>"
   " for fortran 77 files use C on first column 
   elseif file_name =~ '\.f$' || file_name =~ '\.F$'

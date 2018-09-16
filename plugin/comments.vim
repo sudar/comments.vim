@@ -3,9 +3,9 @@
 " *********************************************************************************************
 " Description : Global Plugin to comment and un-comment different 
 "               source files in both normal and visual <Shift-V> mode
-" Last Change : 26th April, 2006
+" Last Change : 16th September, 2018
 " Created By  : Jasmeet Singh Anand <jasanand@hotmail.com>
-" Version     : 2.2
+" Version     : 2.13
 " Usage       : For VIM 6 -
 "               Stick this file in your ~/.vim/plugin directory or 
 "               in some other 'plugin' directory that is in your runtime path
@@ -94,6 +94,9 @@
 " *********************************************************************************************
 " Jasmeet Anand 11th January 2009 v2.12
 " bug fix for haskel files as prpvided by Jean-Marie
+" *********************************************************************************************
+" Padalko Evgeniy 16th September 2018 v2.13
+" Added support for .bat and .cmd (windows batch) and _vimrc (vim config at windows).
 "
 
 " Exit if already loaded
@@ -159,7 +162,7 @@ function! CommentLine()
        execute ":silent! normal ^i\<\!--\<ESC>$a--\>\<ESC>==\<down>^"
     endif
   " for .vim files use "
-  elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
+  elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$' || file_name =~ '_vimrc$'
 	 execute ":silent! normal ^i\"\<ESC>\<down>^"
   " for .sql or .pig files use --
   elseif file_name =~ '\.sql$' || file_name =~ '\.pig$'
@@ -182,6 +185,9 @@ function! CommentLine()
   " for .clj or .cljs files use ;
   elseif file_name =~ '\.clj$' || file_name =~ '\.cljs$'
     execute ":silent! normal ^i;; \<ESC>\<down>"
+  " for windows batch files use ::
+  elseif file_name =~ '\.bat$' || file_name =~ '\.cmd$'
+    execute ":silent! normal ^i:: \<ESC>\<down>"
   " for all other files use # 
   else
     execute ":silent! normal ^i#\<ESC>\<down>^"
@@ -203,7 +209,7 @@ function! UnCommentLine()
   elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\/\\*//\<CR>:s/\\*\\///\<CR>:nohlsearch\<CR>=="
   " for .vim files use "
-  elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
+  elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$' || file_name =~ '_vimrc$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\\"//\<CR>:nohlsearch\<CR>"
   " for .sql or .pig files use --
   elseif file_name =~ '\.sql$' || file_name =~ '\.pig$'
@@ -230,6 +236,9 @@ function! UnCommentLine()
   " for .clj or .cljs
   elseif file_name =~ '\.clj$' || file_name =~ '\.cljs$'
       execute ":silent! normal :nohlsearch\<CR>:s/;; //\<CR>:nohlsearch\<CR>=="
+  " for windows batch files use ::
+  elseif file_name =~ '\.bat$' || file_name =~ '\.cmd$'
+    execute ":silent! normal :nohlsearch\<CR>:s/:: \\?//\<CR>:nohlsearch\<CR>=="
   " for all other files use # 
   else
     execute ":silent! normal :nohlsearch\<CR>:s/\\#//\<CR>:nohlsearch\<CR>"
@@ -276,7 +285,7 @@ function! RangeCommentLine()
       execute ":silent! normal ^i\(*\<ESC>$a*)\<ESC>==\<down>^"
 	endif
   " for .vim files use --
-  elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
+  elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$' || file_name =~ '_vimrc$'
     execute ":silent! normal :s/\\S/\\\"\\0/\<CR>:nohlsearch<CR>"
   " for .sql or .pig files use --
   elseif file_name =~ '\.sql$' || file_name =~ '\.pig$'
@@ -299,6 +308,9 @@ function! RangeCommentLine()
   " for .clj and .cljs files use ;
   elseif file_name =~ '\.clj$' || file_name =~ '\cljs.$'
     execute ":silent! normal ^gI;; \<ESC>\<down>^"
+  " for windows batch files use ::
+  elseif file_name =~ '\.bat$' || file_name =~ '\.cmd$'
+    execute ":silent! normal ^i:: \<ESC>\<down>^"
   " for all other files use #  
   else
     execute ":silent! normal :s/\\S/\\#\\0/\<CR>:nohlsearch<CR>"
@@ -316,7 +328,7 @@ function! RangeUnCommentLine()
   elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' 
     execute ":silent! normal :nohlsearch\<CR>:s/\\/\\*//\<CR>:s/\\*\\///\<CR>:nohlsearch\<CR>=="
   " for .vim files use " 
-  elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
+  elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$' || file_name =~ '_vimrc$'
     execute ":silent! normal :s/\\\"//\<CR>:nohlsearch\<CR>"
   " for .sql or .pig files use --
   elseif file_name =~ '\.sql$' || file_name =~ '\.pig$'
@@ -346,6 +358,9 @@ function! RangeUnCommentLine()
   " for .clj and .cljs files use ;
   elseif file_name =~ '\.clj$' || file_name =~ '\.cljs$'
     execute ":silent! normal :s/;; //\<CR>:nohlsearch\<CR>"
+  " for windows batch files use ::
+  elseif file_name =~ '\.bat$' || file_name =~ '\.cmd$'
+    execute ":silent! normal :s/:: \\?//\<CR>:nohlsearch\<CR>"
   " for all other files use # 
   else
     execute ":silent! normal :s/\\#//\<CR>:nohlsearch\<CR>"

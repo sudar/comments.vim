@@ -20,6 +20,9 @@
 " *********************************************************************************************
  "Modification:
 " *********************************************************************************************
+"  Kashaan Mahmood (https://github.com/Kashaan-M/) 20th January, 2023
+"  Added support for React JSX (*.jsx) and TypeScript (*.ts) files
+" *********************************************************************************************
 " Sudar Muthu (http://sudarmuthu.com) 28th November, 2012 
 " Added support for Matlab and Octave (*.m) files
 " *********************************************************************************************
@@ -124,8 +127,8 @@ endif
 function! CommentLine()
   let file_name = buffer_name("%")
 
-  " for .cpp or .hpp or .java or .js or arduino (*.ino or *.pde) or go files use //
-  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$' || file_name =~ '\.go$' || file_name =~ '\.js$' 
+  " for .cpp or .hpp or .java or .js or .ts or arduino (*.ino or *.pde) or go files use //
+  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$' || file_name =~ '\.go$' || file_name =~ '\.js$' || file_name =~ '\.ts$' 
     execute ":silent! normal ^i//\<ESC>==\<down>^"
   " for .c or .h or .pc or .css files use /* */
   elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$'
@@ -182,6 +185,12 @@ function! CommentLine()
   " for .clj or .cljs files use ;
   elseif file_name =~ '\.clj$' || file_name =~ '\.cljs$'
     execute ":silent! normal ^i;; \<ESC>\<down>"
+  " for .jsx
+  elseif file_name=~ '\.jsx$'
+    execute ":silent! normal ^i{\/\*\<ESC>$a\*\/}\<ESC>==\<down>^"
+    " there is a small bug when the a line in .jsx starts with <, we see an additional } pop up to the left side.
+    " The below execute solves that but I don't know enough vimscript to solve this bug
+    " execute ":silent! normal ^i{\/\*\<ESC>\<right>i\<BS>\<ESC>$a\*\/}\<ESC>==\<down>^"
   " for all other files use # 
   else
     execute ":silent! normal ^i#\<ESC>\<down>^"
@@ -193,7 +202,7 @@ function! UnCommentLine()
   let file_name = buffer_name("%")
 
   " for .cpp or .hpp or .java or .js or arduino (*.ino or *.pde) files use //
-  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$' || file_name =~ '\.go$' || file_name =~ '\.js$' 
+  if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.ino$' || file_name =~ '\.pde$' || file_name =~ '\.go$' || file_name =~ '\.js$' || file_name =~ '\.ts$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\/\\///\<CR>:nohlsearch\<CR>=="
   " for .ml or .mli
   elseif file_name =~ '\.ml$' || file_name =~ '\.mli$'
@@ -230,6 +239,10 @@ function! UnCommentLine()
   " for .clj or .cljs
   elseif file_name =~ '\.clj$' || file_name =~ '\.cljs$'
       execute ":silent! normal :nohlsearch\<CR>:s/;; //\<CR>:nohlsearch\<CR>=="
+  " for .jsx 
+  elseif file_name =~ '\.jsx$'
+      execute ":silent! normal :nohlsearch\<CR>:s/{\\/\\*//\<CR>=="
+      execute ":silent! normal :nohlsearch\<CR>:s/\\*\\/}//\<CR>=="
   " for all other files use # 
   else
     execute ":silent! normal :nohlsearch\<CR>:s/\\#//\<CR>:nohlsearch\<CR>"

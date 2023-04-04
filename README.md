@@ -1,28 +1,26 @@
-comments.vim
-=============
+# comments.vim
 
-Global Plugin to comment and un-comment lines in different source files in both normal and visual <Shift-V> mode 
+Global Plugin to comment and un-comment lines in different source files in both normal and visual <Shift-V> mode
 
 The following are the changes that I have done to the original Plugin
 
+- Added support for React (.jsx) and TypeScript (.ts)
 - Added support for Arduino files (both .pde and .ino)
 - Added support for Pig files (.pig)
 - Added support for Golang (.go) (by [Athom](https://github.com/athom))
 - Added support for remapping the keys if needed
 - Added support for Clojure and ClojureScript (by [seedano](https://github.com/ssedano/))
-- Added support for Matlab and Octave (*.m) files
+- Added support for Matlab and Octave (\*.m) files
 
 Credit goes to the original author Jasmeet Singh Anand.
 
-Installation
-============
+# Installation
 
-Manual 
-------
+## Manual
+
 Stick this file in your ~/.vim/plugin directory or in some other 'plugin' directory that is in your runtime path
 
-Using [Vundle](https://github.com/gmarik/vundle)
--------------
+## Using [Vundle](https://github.com/gmarik/vundle)
 
 ```VimL
 
@@ -32,8 +30,7 @@ Using [Vundle](https://github.com/gmarik/vundle)
 
 ```
 
-Configuration
-=============
+# Configuration
 
 By default, the following keys are mapped
 
@@ -59,9 +56,8 @@ You can map your own keys if needed
 
 ```
 
+# Original Readme file
 
-Original Readme file
-====================
 This is a mirror of http://www.vim.org/scripts/script.php?script_id=1528
 
 Global Plugin to comment and un-comment lines in different source files in both normal and visual <Shift-V> mode
